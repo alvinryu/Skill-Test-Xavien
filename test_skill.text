@@ -1,0 +1,181 @@
+Essai
+1. Golang adalah salah satu dari sekian bahasa pemrograman yang sedang populer saat ini. 
+Bahasa ini dikembangkan oleh tim Google. Bahasa ini mirip dengan bahasa C karena memang dikembangkan dari bahasa C itu sendiri. 
+Golang disebut-sebut sebagai bahasa pemrograman yang cepat. Golang dikompilasi ke dalam kode mesin sehingga performanya lebih 
+cepat daripada bahasa yang menggunakan virtual runtime dalam kompilasinya. Golang juga memiliki garbage collector dan concurrency.
+
+
+2. Struktur file di dalam sebuah file golang adalah
+   1. Deklarasi Package
+   2. Import library
+   3. Main method
+   4. Statement
+
+Blok kode dibungkus menggunakan tanda { dan }
+Komentar menggunakan // dan /*..*/
+
+--------------------------------------------------------------------
+
+1.
+package main
+import "fmt"
+
+func main() {
+    angka := 1234567
+    
+    for i:=1000000; i>0; i=i/10 {
+        temp := angka/i
+        
+        if temp < 2 {
+            fmt.Print(temp)
+            fmt.Println("000000")
+        }else{
+            j := 10
+            for temp > 9{
+                temp = temp % j
+                j=j*10
+            }
+            fmt.Print(temp)
+            if i == 100000 {
+                fmt.Println("00000")
+            }else if i == 10000 {
+                fmt.Println("0000")
+            }else if i == 1000 {
+                fmt.Println("000")
+            }else if i == 100 {
+                fmt.Println("00")
+            }else if i == 10{
+                fmt.Println("0")
+            }
+            
+        }
+        
+    }
+    
+}
+--------------------------------------------------------------------------------
+2. 
+package main
+import (
+        "fmt"
+        "sort"
+)
+
+func total(arr []int) int{
+    sum:=0
+    
+    for _,val := range arr {
+        sum += val
+    }
+    
+    return sum
+}
+
+func rata2(arr []int) float32{
+    sum := 0
+    
+    for _,val := range arr {
+        sum += val
+    }
+    
+    return float32(sum)/float32(len(arr))
+    
+}
+
+func MaxAndMin(arr []int) {
+    min := arr[0]
+    max := arr[len(arr)-1]
+    
+    fmt.Printf("Nilai terendah %d\n", min)
+    fmt.Printf("Nilai tertinggi %d\n", max)
+    fmt.Println("------------------------------")
+}
+
+func main() {
+    var num = []int{1,2,33,44,55,33,44,22,44,33,2,77,66,1,2,3,4,5,6,7,89,3,3,8,9,75,4,3,2,2,1,3}
+    sort.Ints(num)
+    
+    var num1 = num[0:12]
+    var num2 = num[11:22]
+    var num3 = num[22:32]
+    
+    fmt.Println(num)
+    fmt.Println("Membagi menjadi 3 kelompok")
+    fmt.Println(num1)
+    fmt.Println(num2)
+    fmt.Println(num3)
+    fmt.Println("Total tiap kelompok data")
+    fmt.Println(total(num1))
+    fmt.Println(total(num2))
+    fmt.Println(total(num3))
+    fmt.Println("Rata2 tiap kelompok data")
+    fmt.Println(rata2(num1))
+    fmt.Println(rata2(num2))
+    fmt.Println(rata2(num3))
+    fmt.Println("Nilai terendah dan tertinggi tiap kelompok data")
+    MaxAndMin(num1)
+    MaxAndMin(num2)
+    MaxAndMin(num3)
+}
+--------------------------------------------------------------------------------
+3.
+
+
+--------------------------------------------------------------------------------
+4.
+package main
+import (
+    "fmt"
+    "math/rand"
+    "time"
+)
+
+func main() {
+    s1 := rand.NewSource(time.Now().UnixNano())
+    r1 := rand.New(s1)
+    random := r1.Intn(101)
+    langkah:=0
+    
+    fmt.Println(random)
+    
+    tengah := 50
+    if random > tengah {
+        tengah =tengah+10
+        langkah++
+        for random > tengah {
+            tengah =tengah+10
+            langkah++
+        }
+        if random <= tengah {
+            for true {
+                if random == tengah {
+                    break
+                }
+                langkah++
+                tengah--
+            }
+        }
+        fmt.Println(tengah)
+    }else if random == tengah {
+        fmt.Println(tengah)
+    }else{
+        tengah =tengah-10
+        langkah++
+        for random < tengah {
+            tengah =tengah-10
+            langkah++
+        }
+        if random >= tengah {
+            for true {
+                if random == tengah {
+                    break
+                }
+                langkah++
+                tengah++
+            }
+        }
+        fmt.Println(tengah)
+    }
+    
+    fmt.Printf("Total ada %d langkah\n", langkah)
+}
